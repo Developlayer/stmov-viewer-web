@@ -1,0 +1,17 @@
+services:
+  # STMOV Viewer Web Service
+  - type: web
+    name: stmov-viewer-web
+    runtime: node
+    env: node
+    region: oregon  # または singapore など、近いリージョンを選択可能
+    plan: free  # free, starter, standard から選択
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DEBUG_MODE
+        value: false
+    healthCheckPath: /health
+    autoDeploy: true  # mainブランチへのプッシュで自動デプロイ

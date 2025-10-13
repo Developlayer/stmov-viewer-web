@@ -4,9 +4,12 @@
   "description": "STMOV 3D point cloud video player for Sports Time Machine",
   "main": "src/server.js",
   "scripts": {
-    "start": "PORT=3001 node src/server.js",
+    "start": "node src/server.js",
     "dev": "PORT=3001 nodemon src/server.js",
     "build": "npm install"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "keywords": [
     "stmov",
