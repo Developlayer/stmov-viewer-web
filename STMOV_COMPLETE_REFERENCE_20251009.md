@@ -85,6 +85,13 @@
 - **ST_Client準拠**: 座標変換・描画アルゴリズムはST_Client（C++実装）に完全準拠し、互換性を確保
 - **軽量・高速**: Three.js + WebGLによる効率的な3D描画
 
+**デプロイ環境:**
+- **公開URL**: https://stmov-viewer-web.onrender.com
+- **プラットフォーム**: Render (PaaS)
+- **プラン**: Free（無料プラン）
+- **リージョン**: Singapore
+- **Node.js要件**: v18以上
+
 **主な用途:**
 - STMOVファイルの閲覧・確認
 - 競技データの簡易分析
@@ -881,6 +888,36 @@ Web版STMOV Player
             ├─ OrbitControls.js     カメラ操作 (25KB)
             └─ jszip.min.js         ZIP展開 (95KB)
 ```
+
+### 8.1.1 デプロイメント構成（2025-10-13追加）
+
+**本番環境:**
+- **プラットフォーム**: Render (https://render.com)
+- **公開URL**: https://stmov-viewer-web.onrender.com
+- **リージョン**: Singapore
+- **プラン**: Free（無料プラン）
+- **Node.jsバージョン**: 18.x（`.nvmrc`で指定）
+
+**環境変数:**
+| 変数名 | 本番環境 | ローカル環境 | 説明 |
+|--------|---------|------------|------|
+| `PORT` | (自動設定) | 3001 | サーバーポート |
+| `NODE_ENV` | `production` | `development` | 実行環境 |
+| `DEBUG_MODE` | `false` | `true` | デバッグログ有効化 |
+
+**デプロイ設定:**
+- **ビルドコマンド**: `npm install`
+- **起動コマンド**: `npm start` (= `node src/server.js`)
+- **ヘルスチェック**: `/health` エンドポイント（30秒ごと）
+- **自動デプロイ**: GitHubの`main`ブランチへのプッシュで自動再デプロイ
+
+**制限事項（無料プラン）:**
+- 15分間非アクティブでスリープ状態になる
+- 起動時に30秒〜1分程度かかる
+- 月間750時間の稼働時間制限
+- 512MB RAM、0.1 CPU
+
+詳細は `DEPLOYMENT.md` を参照。
 
 ### 8.2 クラス構造
 
