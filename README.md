@@ -39,7 +39,7 @@ npm start
 ## 📚 ドキュメント
 
 - **[使い方.md](./使い方.md)** - 基本的な使い方とインストール手順
-- **[完全技術仕様書](./STMOV_COMPLETE_REFERENCE_20251009.md)** - STMOV形式およびシステム全体の詳細な技術仕様
+- **[完全技術仕様書](./STMOV_COMPLETE_REFERENCE.md)** - STMOV形式およびシステム全体の詳細な技術仕様
 - **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Renderへのデプロイ手順と設定
 
 ---
