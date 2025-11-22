@@ -106,15 +106,30 @@ class MinimalSTMOVViewer {
         this.scene.background = new THREE.Color(0x000000);
 
         // Camera optimized for 6-unit (24m) track visualization
+        // アスペクト比に応じて視野角（FOV）を調整
+        const aspect = container.clientWidth / container.clientHeight;
+        let fov = 60; // デフォルト視野角
+
+        // 縦長画面（スマホなど）では広い視野角で24m全体を表示
+        if (aspect < 1.0) {
+            // 縦向き（aspect < 1.0）
+            fov = 75; // より広い視野角
+        } else if (aspect < 1.5) {
+            // タブレット縦向きなど
+            fov = 70;
+        }
+
         this.camera = new THREE.PerspectiveCamera(
-            60,
-            container.clientWidth / container.clientHeight,
+            fov,
+            aspect,
             0.1,
             PerformanceConfig.CAMERA_FAR_PLANE
         );
+
         // 6ユニット(24m)走路全体を見渡せる位置
         // 右手座標系: X(左右), Y(上下), Z(奥行き-OpenGL反転済み)
-        this.camera.position.set(12, 8, 10); // 24m走路の中央上空から
+        // カメラを後方に配置して24m全体が画面に収まるように調整
+        this.camera.position.set(12, 12, 24); // 24m走路の中央上空、より遠くから
 
         // カメラを24m走路の中心に向ける
         this.camera.lookAt(12, 1.2, -1.2); // X=12は6ユニットの中央
@@ -1100,7 +1115,20 @@ class MinimalSTMOVViewer {
 
     onWindowResize() {
         const container = document.getElementById('three-container');
-        this.camera.aspect = container.clientWidth / container.clientHeight;
+        const aspect = container.clientWidth / container.clientHeight;
+
+        // アスペクト比に応じて視野角（FOV）を調整
+        let fov = 60; // デフォルト視野角
+        if (aspect < 1.0) {
+            // 縦向き（aspect < 1.0）
+            fov = 75; // より広い視野角
+        } else if (aspect < 1.5) {
+            // タブレット縦向きなど
+            fov = 70;
+        }
+
+        this.camera.fov = fov;
+        this.camera.aspect = aspect;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(container.clientWidth, container.clientHeight);
     }
