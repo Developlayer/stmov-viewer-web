@@ -23,7 +23,7 @@
 - **公開URL**: https://stmov-viewer-web.onrender.com
 - **プラン**: Free（無料プラン）
 - **リージョン**: Singapore
-- **Node.jsバージョン**: 18.x
+- **Node.jsバージョン**: 24.x（2026-10-30 に 18 から変更。18 はサポート終了で脆弱性の修正が出ないため）
 - **自動デプロイ**: 有効（mainブランチへのプッシュで自動再デプロイ）
 
 ### 環境変数
@@ -144,7 +144,7 @@ services:
 ```json
 {
   "engines": {
-    "node": ">=18.0.0"
+    "node": "24.x"
   },
   "scripts": {
     "start": "node src/server.js"
@@ -154,10 +154,10 @@ services:
 
 ### .nvmrc
 
-Node.jsバージョンを明示的に指定:
+Node.jsバージョンを明示的に指定（Render はこのファイルを見て Node のバージョンを決める）:
 
 ```
-18
+24
 ```
 
 ---
@@ -214,7 +214,7 @@ git push origin main
 2. `package.json` の `engines` フィールドを確認:
    ```json
    "engines": {
-     "node": ">=18.0.0"
+     "node": "24.x"
    }
    ```
 3. 環境変数が正しく設定されているか確認
@@ -286,5 +286,5 @@ git push origin main
 
 ---
 
-**最終更新**: 2025-10-13
+**最終更新**: 2026-10-30（Node.js を 24 に変更）
 **作成者**: AI（Claude）と非エンジニアの協働開発
